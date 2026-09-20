@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.YishengjiuzhenDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cl.entity.YishengjiuzhenEntity" id="yishengjiuzhenMap">
+        <result property="yuyuebianhao" column="yuyuebianhao"/>
+        <result property="yishengzhanghao" column="yishengzhanghao"/>
+        <result property="yishengxingming" column="yishengxingming"/>
+        <result property="yonghuzhanghao" column="yonghuzhanghao"/>
+        <result property="yonghuxingming" column="yonghuxingming"/>
+        <result property="shoujihaoma" column="shoujihaoma"/>
+        <result property="jiwangbingshi" column="jiwangbingshi"/>
+        <result property="zhenduanwenti" column="zhenduanwenti"/>
+        <result property="zhiliaofangan" column="zhiliaofangan"/>
+        <result property="jiuzhenxiangqing" column="jiuzhenxiangqing"/>
+        <result property="jiuzhenshijian" column="jiuzhenshijian"/>
+        <result property="jiuzhenzhuangtai" column="jiuzhenzhuangtai"/>
+        <result property="yanzhongchengdu" column="yanzhongchengdu"/>
+    </resultMap>
+
+    <select id="selectListView"
+		resultType="com.cl.entity.view.YishengjiuzhenView" >
+
+		SELECT  yishengjiuzhen.* FROM yishengjiuzhen  yishengjiuzhen 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.cl.entity.view.YishengjiuzhenView" >
+		SELECT * FROM yishengjiuzhen  yishengjiuzhen <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectGroupBy"
+		resultType="com.cl.entity.view.YishengjiuzhenView" >
+		select userid,username,paperid,papername,sum(myscore) myscore,ROUND(sum(case when myscore>0 then 1 else 0 end)/(sum(1)),2) accuracy from examrecord     
+        <where> 1=1 ${ew.sqlSegment}</where>
+        group by userid,username,paperid,papername  
+	</select>
+
+</mapper>
